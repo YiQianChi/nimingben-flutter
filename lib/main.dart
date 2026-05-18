@@ -84,6 +84,10 @@ final _router = GoRouter(
       path: '/chat',
       builder: (context, state) => const ChatPage(),
     ),
+    GoRoute(
+      path: '/settings',
+      builder: (context, state) => const SettingsPage(),
+    ),
     // 兼容旧路径
     GoRoute(
       path: '/',

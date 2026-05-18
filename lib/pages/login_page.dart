@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../config/theme.dart';
+import '../config/app_config.dart';
 import '../store/store.dart';
 
 /// 登录方式 Tab
@@ -304,7 +305,7 @@ class _LoginPageState extends ConsumerState<LoginPage>
               // 游客提示
               Center(
                 child: Text(
-                  '游客模式仅可匹配${AppTheme.guestMatchLimitTip}次，登录后无限制',
+                  '游客模式仅可匹配${AppConfig.guestMatchLimit}次，登录后无限制',
                   style: TextStyle(
                     color: isDark ? AppTheme.darkTextHint : AppTheme.textHint,
                     fontSize: 12,
@@ -499,9 +500,4 @@ class _LoginPageState extends ConsumerState<LoginPage>
       ),
     );
   }
-}
-
-/// 扩展：游客匹配次数提示
-extension on AppTheme {
-  static const int guestMatchLimitTip = 3;
 }
