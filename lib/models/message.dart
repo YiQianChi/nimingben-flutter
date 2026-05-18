@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 /// 消息模型
 class Message {
   final String mid;
@@ -14,8 +16,8 @@ class Message {
   // 闪图
   final bool isFlash;
   final int? flashDuration;
-  bool flashOpened;
-  bool flashDestroyed;
+  final ValueNotifier<bool> flashOpened;
+  final ValueNotifier<bool> flashDestroyed;
 
   // 语音
   final String? audioUrl;
@@ -24,7 +26,7 @@ class Message {
   // 状态
   final MessageStatus status;
 
-  const Message({
+  Message({
     required this.mid,
     required this.from,
     required this.type,
@@ -35,12 +37,13 @@ class Message {
     this.imageUrl,
     this.isFlash = false,
     this.flashDuration,
-    this.flashOpened = false,
-    this.flashDestroyed = false,
+    bool flashOpened = false,
+    bool flashDestroyed = false,
     this.audioUrl,
     this.voiceDuration,
     this.status = MessageStatus.sending,
-  });
+  })  : flashOpened = ValueNotifier(flashOpened),
+        flashDestroyed = ValueNotifier(flashDestroyed);
 
   factory Message.fromWS(Map<String, dynamic> data, {required bool isMe}) {
     final msgType = _parseType(data['type'] ?? 'text');
@@ -124,8 +127,8 @@ class Message {
       imageUrl: imageUrl ?? this.imageUrl,
       isFlash: isFlash ?? this.isFlash,
       flashDuration: flashDuration ?? this.flashDuration,
-      flashOpened: flashOpened ?? this.flashOpened,
-      flashDestroyed: flashDestroyed ?? this.flashDestroyed,
+      flashOpened: flashOpened ?? this.flashOpened.value,
+      flashDestroyed: flashDestroyed ?? this.flashDestroyed.value,
       audioUrl: audioUrl ?? this.audioUrl,
       voiceDuration: voiceDuration ?? this.voiceDuration,
       status: status ?? this.status,

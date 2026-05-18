@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../config/theme.dart';
 import '../config/app_config.dart';
+import '../services/api_service.dart';
 import '../store/store.dart';
 
 /// 登录方式 Tab

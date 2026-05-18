@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:go_router/go_router.dart';
 import '../models/message.dart';
+import '../services/api_service.dart';
 import '../services/voice_service.dart';
 import '../store/store.dart';
 import '../widgets/report_dialog.dart';
@@ -414,7 +415,7 @@ class _ChatPageState extends ConsumerState<ChatPage> with TickerProviderStateMix
             if (replyWidget != null) replyWidget,
             Text(
               msg.content,
-              style: TextStyle(color: isMe ? Colors.white : Colors.white90, fontSize: 15),
+              style: TextStyle(color: isMe ? Colors.white : Colors.white70, fontSize: 15),
             ),
             timeWidget,
           ],
@@ -451,13 +452,8 @@ class _ChatPageState extends ConsumerState<ChatPage> with TickerProviderStateMix
             if (replyWidget != null) replyWidget,
             GestureDetector(
               onTap: () {
-                if (!msg.flashOpened) {
-                  setState(() {
-                    final idx = ref.read(chatProvider).messages.indexOf(msg);
-                    if (idx >= 0) {
-                      ref.read(chatProvider).messages[idx].flashOpened = true;
-                    }
-                  });
+                if (!msg.flashOpened.value) {
+                  msg.flashOpened.value = true;
                 }
               },
               child: Container(
@@ -473,7 +469,7 @@ class _ChatPageState extends ConsumerState<ChatPage> with TickerProviderStateMix
                         color: isMe ? Colors.white : Colors.purpleAccent),
                     const SizedBox(width: 8),
                     Text(
-                      msg.flashOpened ? '闪图已查看' : '点击查看闪图',
+                      msg.flashOpened.value ? '闪图已查看' : '点击查看闪图',
                       style: TextStyle(
                           color: isMe ? Colors.white : Colors.purpleAccent),
                     ),
@@ -500,7 +496,7 @@ class _ChatPageState extends ConsumerState<ChatPage> with TickerProviderStateMix
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(msg.content,
-                style: TextStyle(color: isMe ? Colors.white : Colors.white90)),
+                style: TextStyle(color: isMe ? Colors.white : Colors.white70)),
             timeWidget,
           ],
         );

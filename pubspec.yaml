@@ -42,7 +42,7 @@ dependencies:
   connectivity_plus: ^5.0.0
   image_picker: ^1.0.0
   path_provider: ^2.1.0
-  record: ^5.0.0
+  record: ^5.2.1
   permission_handler: ^11.0.0
 
 dev_dependencies:
@@ -58,3 +58,6 @@ flutter:
   assets:
     - assets/images/
     - assets/sounds/
+
+dependency_overrides:
+  record_linux: ^1.0.0

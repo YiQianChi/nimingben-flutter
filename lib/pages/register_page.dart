@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../config/theme.dart';
+import '../services/api_service.dart';
 import '../store/store.dart';
 
 /// 注册页面 — 手机号+验证码+密码
