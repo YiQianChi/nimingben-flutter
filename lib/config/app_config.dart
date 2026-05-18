@@ -20,6 +20,9 @@ class AppConfig {
   static const Duration reconnectBaseDelay = Duration(seconds: 1);
   static const Duration reconnectMaxDelay = Duration(seconds: 32);
 
+  // ===== 应用信息 =====
+  static const String appVersion = '1.0.0';
+
   // ===== 访客限制 =====
   static const int guestMatchLimit = 3;
 
